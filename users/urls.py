@@ -25,4 +25,5 @@ urlpatterns = [
     path('gerencia/', views.gerencia, name='gerencia'),
     path('ventas/', views.ventas, name='area-ventas'),
     path('taller/', views.taller, name='area-taller'),
+    path('management/', views.management, name='management'),
 ]

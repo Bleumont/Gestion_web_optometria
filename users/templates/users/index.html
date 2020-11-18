@@ -33,7 +33,7 @@
           <a class="nav-link active" href="#nosotros">Nuestra Empresa</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#contacto">Contacto</a>
+          <a class="nav-link" href="{% url 'management' %}">Contacto</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}">Area Empleados</a>
@@ -41,7 +41,9 @@
         {% block button %} {% endblock %}
       </ul>
     </nav>
-    <div class="container">{% block content %}{% endblock%}</div>
+    <div class="container">
+      {% block content %}{% endblock%}{% block dbcontent %}{% endblock%}
+    </div>
 
     <!-- Footer -->
     <footer class="page-footer font-small">
