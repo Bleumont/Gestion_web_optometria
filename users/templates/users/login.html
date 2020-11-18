@@ -1,0 +1,35 @@
+{% extends 'users/index.html' %} {% block content %}
+<form class="form-signin p-4">
+  {% load static %}
+
+  <h2 class="h3 mb-3 font-weight-normal">Iniciar Sesion</h2>
+  <label for="inputEmail" class="sr-only">Email</label>
+  <input
+    type="email"
+    id="inputEmail"
+    class="form-control"
+    placeholder="Email"
+    required
+    autofocus
+  />
+  <label for="inputPassword" class="sr-only">Contraseña</label>
+  <input
+    type="password"
+    id="inputPassword"
+    class="form-control"
+    placeholder="Contraseña"
+    required
+  />
+  <div class="checkbox mb-3">
+    <label> <input type="checkbox" value="remember-me" /> Recordarme</label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">
+    Iniciar sesión
+  </button>
+</form>
+
+{% endblock content %} {% block button %}
+<li class="nav-item">
+  <a class="nav-link active btn btn-info" href="/">Volver</a>
+</li>
+{% endblock button %}
