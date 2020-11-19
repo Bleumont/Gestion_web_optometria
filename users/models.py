@@ -9,8 +9,8 @@ class Pacientes(models.Model):
     historial = models.TextField(max_length=255)
 
 class Profesionales(models.Model):
-    nombre = models.CharField(max_length=30)
-    dni = models.IntegerField(primary_key=True)
+    nombre = models.CharField(max_length=30, primary_key=True, verbose_name='Nombre')
+    dni = models.IntegerField()
 
 class Turnos(models.Model):
     profesional = models.ForeignKey(Profesionales, verbose_name='Profesional', on_delete=models.CASCADE)

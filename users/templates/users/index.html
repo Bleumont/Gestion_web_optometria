@@ -13,7 +13,7 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'users/main.css' %}" />
+    <link rel="stylesheet" href="{%static 'users/main.css'%}" />
     <title class="title">Optometría S.A.</title>
   </head>
   <body>
@@ -33,78 +33,38 @@
           <a class="nav-link active" href="#nosotros">Nuestra Empresa</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'management' %}">Contacto</a>
+          <a class="nav-link" href="#">Contacto</a>
         </li>
+        {% if user.is_authenticated %}
+        <li class="nav-link" id="userName">Hola, {{ request.user }}</li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Area Empleados</a>
+          <a class="nav-link active btn btn-info" href="{% url 'logout' %}">Salir</a>
         </li>
-        {% block button %} {% endblock %}
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Administracion</a>
+          </li>
+        {% endif %}            
       </ul>
     </nav>
     <div class="container">
-      {% block content %}{% endblock%}{% block dbcontent %}{% endblock%}
+      {% block content %}{% endblock content %} 
     </div>
+    {% block dbcontent %}{% endblock dbcontent %}
+    <!-- Footer-->
 
-    <!-- Footer -->
-    <footer class="page-footer font-small">
-      <!-- Footer Elements -->
+    <div class="py-3 bg-dark text-white fixed-bottom">
       <div class="container">
-        <!-- Grid row-->
         <div class="row">
-          <!-- Grid column -->
-          <div class="col-md-12 py-5">
-            <div class="mb-5 flex-center">
-              <!-- Facebook -->
-              <a class="fb-ic">
-                <i
-                  class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"
-                >
-                </i>
-              </a>
-              <!-- Twitter -->
-              <a class="tw-ic">
-                <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x">
-                </i>
-              </a>
-              <!-- Google +-->
-              <a class="gplus-ic">
-                <i
-                  class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"
-                >
-                </i>
-              </a>
-              <!--Linkedin -->
-              <a class="li-ic">
-                <i
-                  class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"
-                >
-                </i>
-              </a>
-              <!--Instagram-->
-              <a class="ins-ic">
-                <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x">
-                </i>
-              </a>
-              <!--Pinterest-->
-              <a class="pin-ic">
-                <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
-              </a>
-            </div>
+          <div class="col-md-7 text-center text-md-left">
+            <p class="mb-md-0">© 2020 <a href="https://github.com/Bleumont" class="external text-white">Bleumont</a>. Todos los derechos reservados.                        </p>
           </div>
-          <!-- Grid column -->
+          <div class="col-md-5 text-center text-md-right">
+            <p class="mb-0">FB-IG-GH-LI</a>  </p>
+          </div>
         </div>
-        <!-- Grid row-->
       </div>
-      <!-- Footer Elements -->
-
-      <!-- Copyright -->
-      <div class="footer-copyright text-center py-3">
-        © 2020 Copyright:
-        <a href="https://mdbootstrap.com/"> Bleumont</a>
-      </div>
-      <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

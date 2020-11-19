@@ -1,0 +1,9 @@
+{% extends 'users/index.html' %}
+{% block content %}
+    <h2 class="form-signin">Te has desconectado</h2>
+    <div class="border-top pt-3 form-signin">
+        <small class='text-muted'>
+            <a href="{% url 'login' %}" class="ml-2">Volver a logearse</a>
+        </small>
+    </div>
+{% endblock %}

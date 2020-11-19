@@ -1,16 +1,16 @@
 {% extends 'users/index.html' %} {% block content %}
-<form class="form-signin p-4">
-  {% load static %}
+<form class="form-signin p-4" method="POST">
+  {% csrf_token %}
 
   <h2 class="h3 mb-3 font-weight-normal">Iniciar Sesion</h2>
-  <label for="inputEmail" class="sr-only">Email</label>
+  <label class="sr-only">Usuario</label>
   <input
-    type="email"
-    id="inputEmail"
+    type="text"
     class="form-control"
-    placeholder="Email"
+    placeholder="Usuario"
     required
     autofocus
+    name="username"
   />
   <label for="inputPassword" class="sr-only">Contraseña</label>
   <input
@@ -19,6 +19,7 @@
     class="form-control"
     placeholder="Contraseña"
     required
+    name='password'
   />
   <div class="checkbox mb-3">
     <label> <input type="checkbox" value="remember-me" /> Recordarme</label>
@@ -27,9 +28,4 @@
     Iniciar sesión
   </button>
 </form>
-
-{% endblock content %} {% block button %}
-<li class="nav-item">
-  <a class="nav-link active btn btn-info" href="/">Volver</a>
-</li>
-{% endblock button %}
+{% endblock content %}
