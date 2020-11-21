@@ -8,9 +8,15 @@ class Pacientes(models.Model):
     dni = models.IntegerField(primary_key=True)
     historial = models.TextField(max_length=255)
 
+    def __str__(self):
+	    return self.nombre
+
 class Profesionales(models.Model):
     nombre = models.CharField(max_length=30, primary_key=True, verbose_name='Nombre')
     dni = models.IntegerField()
+
+    def __str__(self):
+        return self.nombre
 
 class Turnos(models.Model):
     profesional = models.ForeignKey(Profesionales, verbose_name='Profesional', on_delete=models.CASCADE)
@@ -24,6 +30,9 @@ class Productos(models.Model):
     nombre = models.CharField(max_length=30)
     precio = models.FloatField()
     armazon = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.nombre
 
 class Pedidos(models.Model):
     TIPO_DE_PAGO = (
