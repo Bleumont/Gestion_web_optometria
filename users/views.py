@@ -34,18 +34,34 @@ def logout_user(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Secretaria','admin','Gerencia'])
 def secretaria(request):
-    turnos = Pedidos.objects.all()
-    form = TurnoForm(request.POST)
-    
-    context = {'turnos': turnos, 'form': form}
+    turnos = Turnos.objects.all()
+    context = {'turnos': turnos}
 
+    return render(request, 'users/secretaria.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Secretaria','admin','Gerencia'])
+def add_turno(request):
+    
+    form = AddTurnoForm(request.POST)
     if request.method == 'POST':
-        form = TurnoForm(request.POST)
+        form = AddTurnoForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('secretaria')
 
-    return render(request, 'users/secretaria.html', context)
+    return render(request, 'users/add_turno.html', {'form': form})
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Secretaria','admin','Gerencia'])
+def del_turno(request, t_key):
+    turno = Turnos.objects.get(id=t_key)
+    
+    if request.method == 'POST':
+        turno.delete()
+        return redirect('secretaria')
+
+    return render(request, 'users/del_turno.html', {'turno': turno})
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Taller','admin','Gerencia'])
@@ -83,7 +99,24 @@ def ventas(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profesionales','admin','Gerencia'])
 def medicos(request):
-    return render(request, 'users/medicos.html')
+    pacientes = Pacientes.objects.all()
+    context = {'pacientes': pacientes}
+
+    return render(request, 'users/medicos.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Profesionales','admin','Gerencia'])
+def update_paciente(request, p_key):
+    paciente = Pacientes.objects.get(id=p_key)
+    form = UpdatePacienteForm(instance=paciente)
+    context = {'paciente': paciente, 'form': form}
+    if request.method == 'POST':
+        form = UpdatePacienteForm(request.POST, instance=paciente)
+        if form.is_valid():
+            form.save()
+            return redirect('medicos')
+
+    return render(request, 'users/update_paciente.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Taller','admin'])
@@ -103,14 +136,14 @@ def update_pedido(request, p_key):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Secretaria','admin'])
-def update_turno(request, p_key):
-    pedido = Pedidos.objects.get(id=p_key)
-    form = TurnoForm(instance=pedido)
+def update_turno(request, t_key):
+    turno = Turnos.objects.get(id=t_key)
+    form = TurnoForm(instance=turno)
     
-    context = {'pedido': pedido, 'form': form}
+    context = {'turno': turno, 'form': form}
 
     if request.method == 'POST':
-        form = TurnoForm(request.POST, instance=pedido)
+        form = TurnoForm(request.POST, instance=turno)
         if form.is_valid():
             form.save()
             return redirect('secretaria')

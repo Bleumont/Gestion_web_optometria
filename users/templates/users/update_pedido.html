@@ -2,18 +2,33 @@
 
 <form method="POST" >
   {% csrf_token %}
+  <div class="row">
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Estado del Pedido</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
   <tr class="table">
       <td>{{ pedido.id }}</td>
       <td>{{ pedido.producto }}</td>
       <td>{{ pedido.cantidad }}</td>
-      <td>{{ pedido.tipo_pago }}</td>
-      <td>{{ pedido.tipo_pago }}</td>
       <td>{{ pedido.estado_pedido }}</td>
-      {{ form.estado_pedido }}
-</tr>
-
-<input type="submit" class="btn btn-primary"></input>
-<a href="{% url 'taller' %}"class='btn btn-secondary'>Atrás</a>
+      <td>
+        {{ form.estado_pedido }}
+      </td>
+      <td>
+        <input type="submit" class="btn btn-primary"></input>
+        <a href="{% url 'taller' %}"class='btn btn-secondary'>Atrás</a>
+        
+      </td>
+    </tr>
+</table>
+</div>
 </form>
 
 {% endblock content %}

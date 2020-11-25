@@ -3,9 +3,12 @@
 <form method="POST" >
   {% csrf_token %}
     <table class="table">
-      {{ form.as_table }}
+
+      {{ form }}
     </table>
-  <input type="submit" class="btn btn-primary" value="Actualizar"></input>
+  
+  <input type="submit" class="btn btn-primary" value="Crear"></input>
+  
   <a href="{% url 'secretaria' %}"class='btn btn-secondary'>Atrás</a>
 </form>
 

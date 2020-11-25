@@ -25,3 +25,13 @@ class TurnoForm(forms.ModelForm):
     class Meta:
         model = Turnos
         fields = '__all__'
+
+class AddTurnoForm(forms.ModelForm):
+    class Meta:
+        model = Turnos
+        fields = ['profesional', 'paciente', 'fecha']
+
+class UpdatePacienteForm(forms.ModelForm):
+    class Meta:
+        model = Pacientes
+        fields = ['historial']

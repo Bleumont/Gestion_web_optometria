@@ -1,14 +1,28 @@
-{% extends 'users/index.html' %} {% block content %} {% for pedido in Pedidos %}
-<div>
-  <tr class="table">
-    <td>{{ pedido.id }}</td>
-    <td>{{ pedido.producto }}</td>
-    <td>{{ pedido.cantidad }}</td>
-    <td>{{ pedido.tipo_pago }}</td>
-    <td>{{ pedido.estado_pedido }}</td>
-    <a href="{% url 'update_pedido' pedido.id %}">Actualizar</a>
-  </tr>
-  <br />
-</div>
+{% extends 'users/index.html' %} {% block content %}
+<div class="row">
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Estado del Pedido</th>
+      <th></th>
+    </tr>
 
-{% endfor %}{% endblock content %}
+    {% for pedido in Pedidos %}
+    <tr class="table">
+      <td>{{ pedido.id }}</td>
+      <td>{{ pedido.producto }}</td>
+      <td>{{ pedido.cantidad }}</td>
+      <td>{{ pedido.estado_pedido }}</td>
+      <td>
+        <a class="btn btn-secondary" href="{% url 'update_pedido' pedido.id %}"
+          >Actualizar</a
+        >
+      </td>
+    </tr>
+
+    {% endfor %}
+  </table>
+</div>
+{% endblock content %}

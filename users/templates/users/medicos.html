@@ -1,0 +1,28 @@
+{% extends 'users/index.html' %} {% block content %}
+<div class="row">
+  <table class="table">
+    <tr>
+      <th>Nombre</th>
+      <th>DNI</th>
+      <th>Historial</th>
+      <th></th>
+    </tr>
+
+    {% for paciente in pacientes %}
+    <tr class="table">
+      <td>{{ paciente.nombre }}</td>
+      <td>{{ paciente.dni }}</td>
+      <td>{{ paciente.historial }}</td>
+      <td>
+        <a
+          class="btn btn-secondary"
+          href="{% url 'update_paciente' paciente.id %}"
+          >Agregar Observación</a
+        >
+      </td>
+    </tr>
+
+    {% endfor %}
+  </table>
+</div>
+{% endblock content %}

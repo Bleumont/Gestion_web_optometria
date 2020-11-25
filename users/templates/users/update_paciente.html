@@ -3,10 +3,10 @@
 <form method="POST" >
   {% csrf_token %}
     <table class="table">
-      {{ form.as_table }}
+      {{ form }}
     </table>
   <input type="submit" class="btn btn-primary" value="Actualizar"></input>
-  <a href="{% url 'secretaria' %}"class='btn btn-secondary'>Atrás</a>
+  <a href="{% url 'medicos' %}"class='btn btn-secondary'>Atrás</a>
 </form>
 
 

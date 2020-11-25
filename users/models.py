@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Pacientes(models.Model):
     nombre = models.CharField(max_length=30)
-    dni = models.IntegerField(primary_key=True)
+    dni = models.IntegerField()
     historial = models.TextField(max_length=255)
 
     def __str__(self):
@@ -20,9 +20,12 @@ class Profesionales(models.Model):
 
 class Turnos(models.Model):
     profesional = models.ForeignKey(Profesionales, verbose_name='Profesional', on_delete=models.CASCADE)
-    dni = models.IntegerField(default=12345678, verbose_name='DNI del Paciente')
+    paciente = models.ForeignKey(Pacientes, verbose_name='Paciente', on_delete=models.CASCADE)
     fecha = models.DateField()
     asistencia = models.BooleanField(default=False, verbose_name='Asistió al Turno ')
+
+    def __str__(self):
+        return f"{self.fecha} {self.profesional}"
     
 class Productos(models.Model):
     LENTES = (('LI', 'Lejos Izquierda'),('LD', 'Lejos Derecha'),('CI', 'Cerca Izquierda'),('CD', 'Cerca Derecha'))
