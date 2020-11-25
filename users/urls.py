@@ -19,10 +19,12 @@ from django.urls import path
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('management/', views.management, name='management'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('secretaria/', views.secretaria, name='secretaria'),
     path('medicos/', views.medicos, name='medicos'),
     path('taller/', views.taller, name='taller'),
+    path('update_pedido/<str:p_key>/', views.update_pedido, name='update_pedido'),
+    path('update_turno/<str:p_key>/', views.update_turno, name='update_turno'),
     path('gerencia/', views.gerencia, name='gerencia'),
     path('ventas/', views.ventas, name='ventas'),
     path('403/', views.unauthorized, name='403'),

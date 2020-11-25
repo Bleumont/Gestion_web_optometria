@@ -1,0 +1,18 @@
+{% extends 'users/index.html' %} {% block content %}
+
+<form method="POST" >
+  {% csrf_token %}
+  <tr class="table">
+    <td>{{ turno.id }}</td>
+    <td>{{ turno.profesional }}</td>
+    <td>{{ turno.dni }}</td>
+    <td>{{ turno.fecha }}</td>
+    <td>{{ turno.asistencia }}</td>
+      {{ form }}
+</tr>
+
+<input type="submit" class="btn btn-primary"></input>
+<a href="{% url 'secretaria' %}"class='btn btn-secondary'>Atrás</a>
+</form>
+
+{% endblock content %}

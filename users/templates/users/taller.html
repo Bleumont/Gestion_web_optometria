@@ -1,0 +1,14 @@
+{% extends 'users/index.html' %} {% block content %} {% for pedido in Pedidos %}
+<div>
+  <tr class="table">
+    <td>{{ pedido.id }}</td>
+    <td>{{ pedido.producto }}</td>
+    <td>{{ pedido.cantidad }}</td>
+    <td>{{ pedido.tipo_pago }}</td>
+    <td>{{ pedido.estado_pedido }}</td>
+    <a href="{% url 'update_pedido' pedido.id %}">Actualizar</a>
+  </tr>
+  <br />
+</div>
+
+{% endfor %}{% endblock content %}
