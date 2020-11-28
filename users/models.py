@@ -9,7 +9,7 @@ class Pacientes(models.Model):
     historial = models.TextField(max_length=255)
 
     def __str__(self):
-	    return f"{self.nombre} - {self.dni}"
+	    return self.nombre
 
 class Profesionales(models.Model):
     nombre = models.CharField(max_length=30, primary_key=True, verbose_name='Nombre')
@@ -29,6 +29,7 @@ class Turnos(models.Model):
     
 class Productos(models.Model):
     LENTES = (('LI', 'Lejos Izquierda'),('LD', 'Lejos Derecha'),('CI', 'Cerca Izquierda'),('CD', 'Cerca Derecha'))
+    # es_lente = models.BooleanField(default=False)
     clasificacion = models.CharField(max_length=2, choices=LENTES)
     nombre = models.CharField(max_length=30)
     precio = models.FloatField()
@@ -50,6 +51,8 @@ class Pedidos(models.Model):
     fecha_de_compra = models.DateTimeField(default=timezone.now)
     tipo_pago = models.CharField(max_length=18, choices=TIPO_DE_PAGO)
     subtotal = models.FloatField()
-    estado_pedido = models.CharField(max_length=10, choices=ESTADO.choices)
-    comprador = models.ForeignKey(Pacientes, verbose_name=('DNI Paciente Comprador'), on_delete=models.SET_DEFAULT, default='Cliente')
+    estado_pedido = models.CharField(max_length=10, choices=ESTADO.choices, default='Pendiente')
+    comprador = models.ForeignKey(Pacientes, verbose_name=('Paciente Comprador'), on_delete=models.SET_DEFAULT, default='Cliente')
     vendedor = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default='Vendedor')
+
+

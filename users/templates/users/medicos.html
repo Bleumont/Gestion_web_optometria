@@ -1,28 +1,34 @@
 {% extends 'users/index.html' %} {% block content %}
 <div class="row">
+  <!-- <div>{{ no_turnos }}</div> -->
   <table class="table">
     <tr>
       <th>Nombre</th>
-      <th>DNI</th>
-      <th>Historial</th>
-      <th></th>
+      <th>Fecha del turno <span></span></th>
+      <th>
+        <form method="GET">
+          Buscar: <input name="busqueda" type="date" />
+          <button class="btn btn-success" type="submit">Buscar</button>
+          <button class="btn btn-info" type="submit">Reset</button>
+        </form>
+      </th>
     </tr>
-
-    {% for paciente in pacientes %}
-    <tr class="table">
-      <td>{{ paciente.nombre }}</td>
-      <td>{{ paciente.dni }}</td>
-      <td>{{ paciente.historial }}</td>
-      <td>
-        <a
-          class="btn btn-secondary"
-          href="{% url 'update_paciente' paciente.id %}"
-          >Agregar Observación</a
-        >
-      </td>
-    </tr>
-
-    {% endfor %}
+    <div>
+      {% for turno in turnos %}
+      <tr class="table">
+        <td>{{ turno.paciente }}</td>
+        <td>{{ turno.fecha }}</td>
+        <td>
+          <a
+            class="btn btn-secondary"
+            href="{% url 'update_paciente' turno.id %}"
+            >Agregar Observación</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </div>
   </table>
 </div>
+
 {% endblock content %}

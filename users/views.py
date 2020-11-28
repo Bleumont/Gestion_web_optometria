@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .decorators import allowed_users, unauthenticated_user, admin_only
 from .models import Pedidos, Pacientes, Profesionales, Turnos, Productos
 from .forms import *
@@ -94,20 +95,48 @@ def gerencia(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Ventas','admin','Gerencia'])
 def ventas(request):
-    return render(request, 'users/ventas.html')
+    pedidos = Pedidos.objects.all()
+    form = PedidoForm()
+    context = {'pedidos': pedidos, 'form': form}
+
+    return render(request, 'users/ventas.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Ventas','admin','Gerencia'])
+def add_pedido(request):
+    
+    form = PedidoForm(request.POST)
+    if request.method == 'POST':
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('ventas')
+
+    return render(request, 'users/add_pedido.html', {'form': form})
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profesionales','admin','Gerencia'])
 def medicos(request):
-    pacientes = Pacientes.objects.all()
-    context = {'pacientes': pacientes}
+    turnos = Turnos.objects.filter(profesional=request.user.username)
+    busqueda = request.GET.get('busqueda')
+
+    if busqueda != '' and busqueda is not None:
+        turnos = turnos.filter(fecha__icontains=busqueda)
+
+    no_turnos = 'Sin turnos'
+
+    if turnos is not None:
+        context = {'turnos': turnos}
+    else:
+        context = {'turnos': no_turnos}
 
     return render(request, 'users/medicos.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profesionales','admin','Gerencia'])
 def update_paciente(request, p_key):
-    paciente = Pacientes.objects.get(id=p_key)
+    turno = Turnos.objects.get(id=p_key)
+    paciente = Pacientes.objects.filter(nombre=turno.paciente)[0]
     form = UpdatePacienteForm(instance=paciente)
     context = {'paciente': paciente, 'form': form}
     if request.method == 'POST':
@@ -119,13 +148,11 @@ def update_paciente(request, p_key):
     return render(request, 'users/update_paciente.html', context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Taller','admin'])
+@allowed_users(allowed_roles=['Taller', 'Ventas','admin'])
 def update_pedido(request, p_key):
     pedido = Pedidos.objects.get(id=p_key)
     form = UpdatePedidoForm(instance=pedido)
-    
     context = {'pedido': pedido, 'form': form}
-
     if request.method == 'POST':
         form = UpdatePedidoForm(request.POST, instance=pedido)
         if form.is_valid():
@@ -137,6 +164,7 @@ def update_pedido(request, p_key):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Secretaria','admin'])
 def update_turno(request, t_key):
+    
     turno = Turnos.objects.get(id=t_key)
     form = TurnoForm(instance=turno)
     
@@ -150,8 +178,20 @@ def update_turno(request, t_key):
 
     return render(request, 'users/update_turno.html', context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Ventas','admin'])
+def update_venta(request, p_key):
+    pedido = Pedidos.objects.get(id=p_key)
+    form = PedidoForm(instance=pedido)
+    context = {'pedido': pedido, 'form': form}
+    if request.method == 'POST':
+        form = PedidoForm(request.POST, instance=pedido)
+        if form.is_valid():
+            form.save()
+            return redirect('ventas')
+
+    return render(request, 'users/update_venta.html', context)
+
 def unauthorized(request):
     return render(request, 'users/403.html')
 
-def notfound(request):
-    return render(request, 'users/404.html')

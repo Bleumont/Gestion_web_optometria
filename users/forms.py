@@ -35,3 +35,8 @@ class UpdatePacienteForm(forms.ModelForm):
     class Meta:
         model = Pacientes
         fields = ['historial']
+
+class SearchForm(forms.ModelForm):
+    class Meta:
+        model = Turnos
+        fields = ['fecha']

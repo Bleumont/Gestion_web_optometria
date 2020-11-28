@@ -1,22 +1,38 @@
-{% extends 'users/dashboard.html' %} {% block content %}
+{% extends 'users/index.html' %} {% block content %}
 <br />
 <div class="row">
   <div class="col-md">
     <div class="card card-body">
-      <h5>Productos</h5>
+      <h3>Pedidos</h3>
+      <span>
+        <a class="btn btn-primary" href="{% url 'add_pedido' %}"> Nuevo </a>
+      </span>
     </div>
     <div class="card card-body">
       <table class="table">
         <tr>
           <th>Producto</th>
-          <th>Categoria</th>
-          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Fecha de Compra</th>
+          <th>Tipo de pago</th>
+          <th>Estado del pedido</th>
+          <th>Comprador</th>
+          <th>Vendedor</th>
         </tr>
-        {% for i in productos %}
+        {% for pedido in pedidos %}
         <tr>
-          <td>{{i.nombre}}</td>
-          <td>{{i.categoria}}</td>
-          <td>{{i.precio}}</td>
+          <td>{{pedido.producto}}</td>
+          <td>{{pedido.cantidad}}</td>
+          <td>{{pedido.fecha_de_compra}}</td>
+          <td>{{pedido.tipo_pago}}</td>
+          <td>{{pedido.estado_pedido}}</td>
+          <td>{{pedido.comprador}}</td>
+          <td>{{pedido.vendedor}}</td>
+          <td>
+            <a class="btn btn-warning" href="{% url 'update_venta' pedido.id %}"
+              >Actualizar</a
+            >
+          </td>
         </tr>
         {% endfor %}
       </table>

@@ -27,9 +27,10 @@ urlpatterns = [
     path('update_turno/<str:t_key>/', views.update_turno, name='update_turno'),
     path('del_turno/<str:t_key>/', views.del_turno, name='del_turno'),
     path('update_paciente/<str:p_key>/', views.update_paciente, name='update_paciente'),
+    path('update_venta/<str:p_key>/', views.update_venta, name='update_venta'),
     path('add_turno/', views.add_turno, name='add_turno'),
+    path('add_pedido/', views.add_pedido, name='add_pedido'),
     path('gerencia/', views.gerencia, name='gerencia'),
     path('ventas/', views.ventas, name='ventas'),
     path('403/', views.unauthorized, name='403'),
-    path('404/', views.notfound, name='404'),
 ]
