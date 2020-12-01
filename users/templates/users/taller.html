@@ -1,28 +1,65 @@
 {% extends 'users/index.html' %} {% block content %}
-<div class="row">
-  <table class="table">
-    <tr>
-      <th>ID</th>
-      <th>Producto</th>
-      <th>Cantidad</th>
-      <th>Estado del Pedido</th>
-      <th></th>
-    </tr>
+<br />
+<div class="grid">
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Pedidos en el taller</h3>
+    </div>
+    <div class="card card-body">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>ID</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Estado del Pedido</th>
+          <th></th>
+        </tr>
 
-    {% for pedido in Pedidos %}
-    <tr class="table">
-      <td>{{ pedido.id }}</td>
-      <td>{{ pedido.producto }}</td>
-      <td>{{ pedido.cantidad }}</td>
-      <td>{{ pedido.estado_pedido }}</td>
-      <td>
-        <a class="btn btn-secondary" href="{% url 'update_pedido' pedido.id %}"
-          >Actualizar</a
-        >
-      </td>
-    </tr>
+        {% for pedido in Pedidos %}
+        <tr>
+          <td>{{ pedido.id }}</td>
+          <td>{{ pedido.producto }}</td>
+          <td>{{ pedido.cantidad }}</td>
+          <td>{{ pedido.estado_pedido }}</td>
+          <td>
+            <a
+              class="btn-sm btn-secondary"
+              href="{% url 'update_pedido' pedido.id %}"
+              >Actualizar</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  <br />
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Pedidos finalizados</h3>
+    </div>
+    <div class="card card-body">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>ID</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Estado del Pedido</th>
+          <th></th>
+        </tr>
 
-    {% endfor %}
-  </table>
+        {% for pedido in Finalizados %}
+        <tr>
+          <td>{{ pedido.id }}</td>
+          <td>{{ pedido.producto }}</td>
+          <td>{{ pedido.cantidad }}</td>
+          <td>{{ pedido.estado_pedido }}</td>
+          <td></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
 </div>
+<br />
 {% endblock content %}

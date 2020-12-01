@@ -1,35 +1,81 @@
 {% extends 'users/index.html' %} {% block content %}
 <br />
-<div class="row">
+<div class="grid">
   <div class="col-md">
     <div class="card card-body">
-      <h3>Pedidos</h3>
-      <span>
-        <a class="btn btn-primary" href="{% url 'add_pedido' %}"> Nuevo </a>
-      </span>
+      <h3>
+        Pedidos
+        <div class="float-right">
+          <a class="btn btn-primary" href="{% url 'add_pedido' %}"> Nuevo </a>
+        </div>
+      </h3>
     </div>
     <div class="card card-body">
-      <table class="table">
+      <table class="table table-active text-light table-responsive-sm">
         <tr>
           <th>Producto</th>
           <th>Cantidad</th>
           <th>Fecha de Compra</th>
           <th>Tipo de pago</th>
+          <th>Subtotal</th>
           <th>Estado del pedido</th>
           <th>Comprador</th>
           <th>Vendedor</th>
+          <th></th>
         </tr>
-        {% for pedido in pedidos %}
+        {% for pedido in Pedidos %}
         <tr>
           <td>{{pedido.producto}}</td>
           <td>{{pedido.cantidad}}</td>
           <td>{{pedido.fecha_de_compra}}</td>
           <td>{{pedido.tipo_pago}}</td>
+          <td>${{pedido.subtotal}}</td>
           <td>{{pedido.estado_pedido}}</td>
           <td>{{pedido.comprador}}</td>
           <td>{{pedido.vendedor}}</td>
           <td>
-            <a class="btn btn-warning" href="{% url 'update_venta' pedido.id %}"
+            <a
+              class="btn-sm btn-warning"
+              href="{% url 'update_venta' pedido.id %}"
+              >Actualizar</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  <br />
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>
+        Productos
+        <div class="float-right">
+          <a class="btn btn-primary" href="{% url 'add_producto' %}"> Nuevo </a>
+        </div>
+      </h3>
+    </div>
+    <div class="card card-body">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Es Lente:</th>
+          <th>Clasificacion</th>
+          <th>Si incluye armazon</th>
+          <th></th>
+        </tr>
+        {% for producto in Productos %}
+        <tr>
+          <td>{{producto.nombre}}</td>
+          <td>{{producto.precio}}</td>
+          <td>{{producto.es_lente}}</td>
+          <td>{{producto.clasificacion}}</td>
+          <td>{{producto.armazon}}</td>
+          <td>
+            <a
+              class="btn-sm btn-warning"
+              href="{% url 'update_producto' producto.id %}"
               >Actualizar</a
             >
           </td>

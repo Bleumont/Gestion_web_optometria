@@ -1,20 +1,16 @@
 from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from .models import *
 
-
-class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
-    
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
 
 class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedidos
         fields = '__all__'
+
+class AddPedidoForm(forms.ModelForm):
+    class Meta:
+        model = Pedidos
+        fields = ['producto', 'cantidad', 'tipo_pago', 'comprador']
 
 class UpdatePedidoForm(forms.ModelForm):
     class Meta:
@@ -31,6 +27,10 @@ class AddTurnoForm(forms.ModelForm):
         model = Turnos
         fields = ['profesional', 'paciente', 'fecha']
 
+        widgets = {
+            'fecha': forms.SelectDateWidget()
+        }
+
 class UpdatePacienteForm(forms.ModelForm):
     class Meta:
         model = Pacientes
@@ -40,3 +40,11 @@ class SearchForm(forms.ModelForm):
     class Meta:
         model = Turnos
         fields = ['fecha']
+        widgets = {
+            'fecha': forms.SelectDateWidget()
+        }
+
+class AddProductoForm(forms.ModelForm):
+    class Meta:
+        model = Productos
+        fields = '__all__'

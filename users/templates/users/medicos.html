@@ -1,34 +1,73 @@
 {% extends 'users/index.html' %} {% block content %}
-<div class="row">
-  <!-- <div>{{ no_turnos }}</div> -->
-  <table class="table">
-    <tr>
-      <th>Nombre</th>
-      <th>Fecha del turno <span></span></th>
-      <th>
-        <form method="GET">
-          Buscar: <input name="busqueda" type="date" />
-          <button class="btn btn-success" type="submit">Buscar</button>
-          <button class="btn btn-info" type="submit">Reset</button>
-        </form>
-      </th>
-    </tr>
-    <div>
-      {% for turno in turnos %}
-      <tr class="table">
-        <td>{{ turno.paciente }}</td>
-        <td>{{ turno.fecha }}</td>
-        <td>
-          <a
-            class="btn btn-secondary"
-            href="{% url 'update_paciente' turno.id %}"
-            >Agregar Observación</a
-          >
-        </td>
-      </tr>
-      {% endfor %}
+<br />
+<div class="grid">
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Turnos asignados</h3>
     </div>
-  </table>
+    <div class="card card-body">
+      <div class="card card-body d-flex flex-row">
+        <h5>Filtrar por fecha: &emsp;</h5>
+        <form method="GET">
+          <span>
+            <input type="date" name="fecha" id="fecha" />
+          </span>
+          <span>
+            <button class="btn-sm btn-success" type="submit">Buscar</button>
+            <button class="btn-sm btn-info" type="submit">Reset</button>
+          </span>
+        </form>
+      </div>
+      <div class="card card-body">
+        <table class="table table-active text-light table-responsive-sm">
+          <tr>
+            <th>Paciente</th>
+            <th>Fecha del turno <span></span></th>
+            <th></th>
+          </tr>
+          <div>
+            {% for turno in turnos %}
+            <tr>
+              <td>{{ turno.paciente }}</td>
+              <td>{{ turno.fecha }}</td>
+              <td>
+                <a
+                  class="btn-sm btn-secondary"
+                  href="{% url 'update_paciente' turno.id %}"
+                  >Agregar Observación</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </div>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
+<br />
+<script>
+  function populateYears() {
+    const $yearSelect = document.querySelector('#year');
+    var date = new Date();
+    var year = date.getFullYear();
 
+    for (let i = 0; i <= 10; i++) {
+      var $option = document.createElement('option');
+      $option.textContent = year - i + 1;
+      $yearSelect.appendChild($option);
+    }
+  }
+  function populateDays() {
+    const $daySelect = document.querySelector('#day');
+
+    for (let i = 0; i <= 30; i++) {
+      var $option = document.createElement('option');
+      $option.textContent = i + 1;
+      $daySelect.appendChild($option);
+    }
+  }
+  populateDays();
+  populateYears();
+</script>
 {% endblock content %}

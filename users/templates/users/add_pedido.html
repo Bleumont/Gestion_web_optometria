@@ -1,15 +1,23 @@
 {% extends 'users/index.html' %} {% block content %}
-
-<form method="POST" >
-  {% csrf_token %}
-    <table class="table">
-      {{ form.as_table }}
-    </table>
-  
-  <input type="submit" class="btn btn-primary" value="Crear pedido"></input>
-  
-  <a href="{% url 'ventas' %}"class='btn btn-secondary'>Atrás</a>
-</form>
-
-
+<br />
+<div class="grid">
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Agregar pedido</h3>
+    </div>
+  <div class="card card-body">
+    <form method="POST" >
+      {% csrf_token %}
+        <table class="table table-active text-light table-responsive-sm">
+          {{ form.as_table }}
+        </table>
+      
+      <input type="submit" class="btn btn-primary" value="Crear pedido"></input>
+      
+      <a href="{% url 'ventas' %}"class='btn btn-secondary'>Atrás</a>
+    </form>
+  </div>
+  </div>
+</div>
+<br />
 {% endblock content %}

@@ -10,11 +10,9 @@ from .forms import *
 def index(request):
     return render(request, 'users/index.html')
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['Profesionales','admin','Gerencia', 'Profesionales',
-'Ventas', 'Taller', 'Secretaria'])
-def dashboard(request):
-    return render(request, 'users/dashboard.html')
+
+def landing(request):
+    return render(request, 'users/landing.html')
 
 def login_page(request):
     if request.method == 'POST':
@@ -68,7 +66,9 @@ def del_turno(request, t_key):
 @allowed_users(allowed_roles=['Taller','admin','Gerencia'])
 def taller(request):
     pedidos = Pedidos.objects.all()
-    context = {'Pedidos': pedidos}
+    pedidos = pedidos.filter(estado_pedido='Taller')
+    finalizados = Pedidos.objects.filter(estado_pedido='Finalizado')
+    context = {'Pedidos': pedidos, 'Finalizados': finalizados}
 
     return render(request, 'users/taller.html', context)
 
@@ -80,14 +80,17 @@ def gerencia(request):
     medicos = Profesionales.objects.all()
     turnos = Turnos.objects.all()
     productos = Productos.objects.all()
+    busqueda = request.GET.get('busqueda')
+
+    if busqueda != '' and busqueda is not None:
+        pedidos_por_paciente = turnos.filter(comprador__icontains=busqueda)
 
     total_pedidos = pedidos.count()
     entregados = pedidos.filter(estado_pedido='Finalizado').count()
     pendientes = pedidos.filter(estado_pedido='Pendiente').count()
     asistencias = turnos.filter(asistencia=True).count()
     asistencias = turnos.filter(asistencia=False).count()
-    pedidos_por_paciente= pedidos.filter(published_date__lte=timezone.now())
-    context = {'Pedidos': pedidos, 'Pacientes': pacientes, 'Pedidos Totales': total_pedidos,
+    context = {'Pedidos': pedidos, 'Pacientes': pacientes, 'Pedidos_Totales': total_pedidos,
     'Entregados': entregados, 'Pendientes': pendientes, 'Turnos': turnos, 'Productos': productos, 'Profesionales': medicos}
 
     return render(request, 'users/gerencia.html', context)
@@ -96,8 +99,9 @@ def gerencia(request):
 @allowed_users(allowed_roles=['Ventas','admin','Gerencia'])
 def ventas(request):
     pedidos = Pedidos.objects.all()
+    productos = Productos.objects.all()
     form = PedidoForm()
-    context = {'pedidos': pedidos, 'form': form}
+    context = {'Pedidos': pedidos, 'Productos':productos, 'form': form}
 
     return render(request, 'users/ventas.html', context)
 
@@ -105,9 +109,11 @@ def ventas(request):
 @allowed_users(allowed_roles=['Ventas','admin','Gerencia'])
 def add_pedido(request):
     
-    form = PedidoForm(request.POST)
+    form = AddPedidoForm(request.POST)
+
+    print(request.content_params)
     if request.method == 'POST':
-        form = PedidoForm(request.POST)
+        form = AddPedidoForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('ventas')
@@ -115,20 +121,32 @@ def add_pedido(request):
     return render(request, 'users/add_pedido.html', {'form': form})
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['Ventas','admin','Gerencia'])
+def add_producto(request):
+    
+    form = AddProductoForm(request.POST)
+
+    print(request.content_params)
+    if request.method == 'POST':
+        form = AddProductoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('ventas')
+
+    return render(request, 'users/add_producto.html', {'form': form})
+
+@login_required(login_url='login')
 @allowed_users(allowed_roles=['Profesionales','admin','Gerencia'])
 def medicos(request):
     turnos = Turnos.objects.filter(profesional=request.user.username)
-    busqueda = request.GET.get('busqueda')
-
-    if busqueda != '' and busqueda is not None:
-        turnos = turnos.filter(fecha__icontains=busqueda)
-
-    no_turnos = 'Sin turnos'
-
-    if turnos is not None:
-        context = {'turnos': turnos}
-    else:
-        context = {'turnos': no_turnos}
+    turnos = turnos.order_by('fecha')
+    
+    fecha = request.GET.get('fecha')
+    print(turnos)
+    if fecha != '' and fecha is not None:
+        turnos = turnos.filter(fecha__contains=fecha)
+    
+    context = {'turnos': turnos}
 
     return render(request, 'users/medicos.html', context)
 
@@ -160,6 +178,20 @@ def update_pedido(request, p_key):
             return redirect('taller')
 
     return render(request, 'users/update_pedido.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Ventas','admin', 'Gerencia'])
+def update_producto(request, p_key):
+    producto = Productos.objects.get(id=p_key)
+    form = AddProductoForm(instance=producto)
+    context = {'Producto': producto, 'form': form}
+    if request.method == 'POST':
+        form = AddProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('ventas')
+
+    return render(request, 'users/update_producto.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Secretaria','admin'])

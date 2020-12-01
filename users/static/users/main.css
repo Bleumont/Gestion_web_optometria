@@ -1,25 +1,10 @@
 html,
 body {
   height: 100%;
+  background-color: #152036;
+  color: aqua;
+  overflow: hidden;
 }
-
-.bg-image {
-  position: fixed;
-  background-image: url('./opto.jpg');
-  z-index: -2;
-  left: 0;
-  right: 0;
-
-  filter: blur(4px);
-  -webkit-filter: blur(8px);
-
-  height: 100%;
-
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -63,6 +48,8 @@ body {
 /******** Barra Lateral *********/
 #wrapper {
   overflow-x: hidden;
+  background-color: #152036;
+  color: aqua;
 }
 
 #sidebar-wrapper {
@@ -72,6 +59,8 @@ body {
   -moz-transition: margin 0.25s ease-out;
   -o-transition: margin 0.25s ease-out;
   transition: margin 0.25s ease-out;
+  background-color: #1b2a47 !important;
+  color: aqua;
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -81,6 +70,10 @@ body {
 
 #sidebar-wrapper .list-group {
   width: 15rem;
+}
+#sidebar-wrapper .list-group-item {
+  background-color: #1b2a47 !important;
+  color: aqua;
 }
 
 #page-content-wrapper {
@@ -104,4 +97,17 @@ body {
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
   }
+}
+.logo-link:hover {
+  text-decoration: none;
+}
+.card.card-body {
+  background: #1b2a47;
+  overflow: hidden;
+}
+nav,
+footer {
+  background: #1b2a47 !important;
+  border: 0;
+  padding: 0;
 }

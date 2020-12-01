@@ -1,8 +1,14 @@
 {% extends 'users/index.html' %} {% block content %}
-
+<br />
+<div class="grid">
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Actualizar Turno</h3>
+    </div>
+    <div class="card card-body">
 <form method="POST" >
   {% csrf_token %}
-    <table class="table">
+    <table class="table table-active text-light table-responsive-sm">
       {{ form.as_table }}
     </table>
   <input type="submit" class="btn btn-primary" value="Actualizar"></input>
@@ -10,4 +16,9 @@
 </form>
 
 
+</div>
+</div>
+
+</div>
+<br>
 {% endblock content %}

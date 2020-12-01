@@ -1,34 +1,41 @@
 {% extends 'users/index.html' %} {% block content %}
-
-<form method="POST" >
-  {% csrf_token %}
-  <div class="row">
-  <table class="table">
-    <tr>
-      <th>ID</th>
-      <th>Producto</th>
-      <th>Cantidad</th>
-      <th>Estado del Pedido</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  <tr class="table">
-      <td>{{ pedido.id }}</td>
-      <td>{{ pedido.producto }}</td>
-      <td>{{ pedido.cantidad }}</td>
-      <td>{{ pedido.estado_pedido }}</td>
-      <td>
-        {{ form.estado_pedido }}
-      </td>
-      <td>
-        <input type="submit" class="btn btn-primary"></input>
-        <a href="{% url 'taller' %}"class='btn btn-secondary'>Atrás</a>
-        
-      </td>
-    </tr>
-</table>
+<br />
+<div class="grid">
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Modificar pedido</h3>
+    </div>
+  <div class="card card-body">
+    <form method="POST" >
+    {% csrf_token %}
+    <div class="row">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>ID</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Estado del Pedido</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>{{ pedido.id }}</td>
+          <td>{{ pedido.producto }}</td>
+          <td>{{ pedido.cantidad }}</td>
+          <td>{{ pedido.estado_pedido }}</td>
+          <td>
+            {{ form.estado_pedido }}
+       
+            <input type="submit" class="btn btn-primary" value="Modificar"></input>
+            <a href="{% url 'taller' %}"class='btn btn-secondary'>Atrás</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    </form>
+  </div>
+  </div>
 </div>
-</form>
+<br>
+
 
 {% endblock content %}

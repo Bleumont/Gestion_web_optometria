@@ -1,0 +1,44 @@
+{% extends 'users/index.html' %} {% block content %}
+<br />
+<div class="grid">
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Modificar producto</h3>
+    </div>
+  <div class="card card-body">
+    <form method="POST" >
+      {% csrf_token %}
+        <div class='form-group'>
+          <label for=nombre>Nombre</label>
+          {{ form.nombre }}
+        </div>
+        <br>
+        <div class='form-group'>
+          <label for=precio>Precio</label>
+          {{ form.precio }}
+        </div>
+        <br>
+        <div class='form-group'>
+          <label for=es_lente>Es Lente</label>
+          {{ form.es_lente }}
+        </div>
+        <br>
+        <div class='form-group'>
+          <label for=clasificacion>Tipo de Lente</label>
+          {{ form.clasificacion }}
+        </div>
+        <br>
+        <div class='form-group'>
+          <label for=armazon>Incluye armazon</label>
+          {{ form.armazon }}
+        </div>
+        <br>
+      <input type="submit" class="btn btn-primary" value="Modificar"></input>
+      
+      <a href="{% url 'ventas' %}"class='btn btn-secondary'>Atrás</a>
+    </form>
+  </div>
+  </div>
+</div>
+<br />
+{% endblock content %}

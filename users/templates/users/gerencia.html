@@ -1,0 +1,106 @@
+{% extends 'users/index.html' %} {% block content %}
+<br />
+
+<div class="grid">
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Turnos asignados</h3>
+    </div>
+    <div class="card card-body">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>Paciente</th>
+          <th>Profesional medico</th>
+          <th>Fecha del turno</th>
+        </tr>
+        <div>
+          {% for turno in Turnos %}
+          <tr>
+            <td>{{ turno.paciente }}</td>
+            <td>{{ turno.profesional }}</td>
+            <td>{{ turno.fecha }}</td>
+          </tr>
+          {% endfor %}
+        </div>
+      </table>
+    </div>
+  </div>
+  <br />
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Pedidos</h3>
+    </div>
+    <div class="card card-body">
+      <table
+        class="table table-fluid table-active text-light table-responsive-sm"
+      >
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Fecha de Compra</th>
+          <th>Tipo de pago</th>
+          <th>Estado del pedido</th>
+          <th>Comprador</th>
+          <th>Vendedor</th>
+        </tr>
+        {% for pedido in Pedidos %}
+        <tr>
+          <td>{{pedido.producto}}</td>
+          <td>{{pedido.cantidad}}</td>
+          <td>{{pedido.fecha_de_compra}}</td>
+          <td>{{pedido.tipo_pago}}</td>
+          <td>{{pedido.estado_pedido}}</td>
+          <td>{{pedido.comprador}}</td>
+          <td>{{pedido.vendedor}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  <br />
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Profesionales</h3>
+    </div>
+    <div class="card card-body">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>Nombre</th>
+          <th>DNI</th>
+        </tr>
+
+        {% for profe in Profesionales %}
+        <tr>
+          <td>{{ profe.nombre }}</td>
+          <td>{{ profe.dni }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  <br />
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Pacientes</h3>
+    </div>
+    <div class="card card-body">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>Nombre</th>
+          <th>DNI</th>
+          <th>Historial</th>
+        </tr>
+
+        {% for paciente in Pacientes %}
+        <tr>
+          <td>{{ paciente.nombre }}</td>
+          <td>{{ paciente.dni }}</td>
+          <td>{{ paciente.historial }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+<br />
+{% endblock content %}

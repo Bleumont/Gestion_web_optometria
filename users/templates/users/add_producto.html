@@ -1,0 +1,61 @@
+{% extends 'users/index.html' %} {% block content %}
+<br />
+<div class="grid">
+  <div class="col-md">
+    <div class="card card-body">
+      <h3>Agregar producto</h3>
+    </div>
+  <div class="card card-body">
+    <form method="POST" id="add_producto" >
+      {% csrf_token %}
+        <div class='form-group'>
+          <label for=nombre>Nombre</label>
+          {{ form.nombre }}
+        </div>
+        <br>
+        <div class='form-group'>
+          <label for=precio>Precio</label>
+          {{ form.precio }}
+        </div>
+        <br>
+        <div class='form-group'>
+          <label for=es_lente">Es Lente</label>
+          {{ form.es_lente }}
+        </div>
+        <br>
+        <div id="camposLente" style="display:none">
+          <div class='form-group'>
+            <label for=clasificacion>Tipo de Lente</label>
+              {{form.clasificacion }}
+          </div>
+          <br>
+          <div class='form-group'>
+            <label for=armazon>Incluye armazon</label>{{ form.armazon }}
+          </div>
+          <br>
+        </div>
+            
+      
+      <input type="submit" class="btn btn-primary" value="Crear producto"></input>
+      
+      <a href="{% url 'ventas' %}"class='btn btn-secondary'>Atrás</a>
+    </form>
+  </div>
+  </div>
+</div>
+<br />
+<script>
+  function checkLente(){
+    const $formulario = document.getElementById('camposLente'),
+     $checkBox = document.getElementById("id_es_lente");
+     $checkBox.setAttribute('onclick',"checkLente()")
+  
+    if ($checkBox.checked == true){
+      $formulario.style.display = "block";
+    } else {
+      $formulario.style.display = "none";
+    }
+}
+checkLente()
+</script>
+{% endblock content %}
