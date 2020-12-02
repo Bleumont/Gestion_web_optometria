@@ -12,9 +12,6 @@ from .forms import *
 def index(request):
     return render(request, 'users/index.html')
 
-def landing(request):
-    return render(request, 'users/landing.html')
-
 def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')

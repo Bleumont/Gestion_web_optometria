@@ -123,3 +123,40 @@ footer {
 .collapsible:hover {
   background-color: rgb(69, 51, 134);
 }
+.caja-land {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  height: 100vh;
+  width: 100vw;
+}
+
+.fondo {
+  grid-area: 1 / 1 / 4 / 5;
+  /* background-image: url('./opto.jpg'); */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  filter: blur(8px);
+}
+
+.land-text {
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+.land-text > h1 {
+  position: relative;
+  top: center;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: 'Anton', sans-serif;
+  font-size: 7rem;
+  text-transform: uppercase;
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+  mix-blend-mode: Lighten;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+  background: rgba(135, 86, 214, 0.2);
+}

@@ -50,11 +50,15 @@
           </div>
         </nav>
         <div class="container-fluid">
-          {% if content is Null %}
-          {% block content %}{% endblock content %} 
+          {% block content %}
+          {% if content != None %}
           {% else %}
-          <p>Hola!</p>
+          <div class="grid-container-fluid caja-land">
+            <div class="fondo"></div>
+            <div class="land-text"><h1>Bienvenido</h1></div>
+          </div>
           {% endif %}
+          {% endblock content %} 
         </div>
       </div>
     </div>
