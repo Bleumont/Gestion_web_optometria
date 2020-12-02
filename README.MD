@@ -2,9 +2,9 @@
 # Sistema Web de gestión con Python y JavaScript
 ---
 
-- Sistema implementado en Django.
+- Sistema implementado en Django v3.1.1.
 - Estilos de Boostrap v4.5 y personalizados.
-- Frontend responsivo hecho a mano con HTML, CSS y JS.
+- Frontend responsivo hecho a mano con HTML, CSS, JS, y mucho café.
 - Base de datos: SQLite.
 - Demo de funcionamiento: [YouTube](https://www.example.com).
 - GitHub: [Repo](https://github.com/Bleumont/Python_JS_PoloTic).

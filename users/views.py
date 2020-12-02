@@ -2,14 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Sum
 from .decorators import allowed_users, unauthenticated_user, admin_only
 from .models import Pedidos, Pacientes, Profesionales, Turnos, Productos
+import datetime
 from .forms import *
 
 # Create your views here.
 def index(request):
     return render(request, 'users/index.html')
-
 
 def landing(request):
     return render(request, 'users/landing.html')
@@ -75,23 +76,28 @@ def taller(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Gerencia','admin','Gerencia'])
 def gerencia(request):
+    today = datetime.date.today()
     pedidos = Pedidos.objects.all()
     pacientes = Pacientes.objects.all()
     medicos = Profesionales.objects.all()
     turnos = Turnos.objects.all()
-    productos = Productos.objects.all()
-    busqueda = request.GET.get('busqueda')
 
-    if busqueda != '' and busqueda is not None:
-        pedidos_por_paciente = turnos.filter(comprador__icontains=busqueda)
+    asistencias = turnos.filter(asistencia=True).filter(fecha__year=today.year, fecha__month=today.month)
+    inasistencias = turnos.filter(asistencia=False).filter(fecha__year=today.year, fecha__month=today.month)
+    cantidad_ventas = Pedidos.objects.values('producto').order_by('producto').annotate(vendidos=Sum('cantidad')).filter(estado_pedido='Finalizado', fecha_de_compra__year=today.year, fecha_de_compra__month=today.month)
+    
+    total_ventas = pedidos.values('vendedor').annotate(vendidos=Sum('cantidad')).filter(estado_pedido='Finalizado').filter(fecha_de_compra__year=today.year, fecha_de_compra__month=today.month)
+   
+    pedidos_mes = pedidos.filter(fecha_de_compra__year=today.year, fecha_de_compra__month=today.month)
+    pacientes_compradores = []
+    for pedido in pedidos_mes:
+        paciente = Pacientes.objects.get(nombre=pedido.comprador.nombre)
+        pacientes_compradores.append(paciente)
+    pacientes_set = set(pacientes_compradores)
 
-    total_pedidos = pedidos.count()
-    entregados = pedidos.filter(estado_pedido='Finalizado').count()
-    pendientes = pedidos.filter(estado_pedido='Pendiente').count()
-    asistencias = turnos.filter(asistencia=True).count()
-    asistencias = turnos.filter(asistencia=False).count()
-    context = {'Pedidos': pedidos, 'Pacientes': pacientes, 'Pedidos_Totales': total_pedidos,
-    'Entregados': entregados, 'Pendientes': pendientes, 'Turnos': turnos, 'Productos': productos, 'Profesionales': medicos}
+    context = {'Pedidos': pedidos, 'Pacientes': pacientes, 'Ventas_Totales': total_ventas, 
+    'Asistencias': asistencias, 'Inasistencias': inasistencias, 'Clientes':pacientes_set,
+    'Turnos': turnos, 'Profesionales': medicos, 'Mas_vendidos':cantidad_ventas}
 
     return render(request, 'users/gerencia.html', context)
 
@@ -111,7 +117,6 @@ def add_pedido(request):
     
     form = AddPedidoForm(request.POST)
 
-    print(request.content_params)
     if request.method == 'POST':
         form = AddPedidoForm(request.POST)
         if form.is_valid():
@@ -126,7 +131,6 @@ def add_producto(request):
     
     form = AddProductoForm(request.POST)
 
-    print(request.content_params)
     if request.method == 'POST':
         form = AddProductoForm(request.POST)
         if form.is_valid():
@@ -142,7 +146,6 @@ def medicos(request):
     turnos = turnos.order_by('fecha')
     
     fecha = request.GET.get('fecha')
-    print(turnos)
     if fecha != '' and fecha is not None:
         turnos = turnos.filter(fecha__contains=fecha)
     

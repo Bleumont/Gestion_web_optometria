@@ -2,11 +2,10 @@
 <br />
 
 <div class="grid">
-  <div class="col-md">
-    <div class="card card-body">
-      <h3>Turnos asignados</h3>
+    <div class="card card-body collapsible d-flex flex-row justify-content-between">
+      <h3>Turnos asignados&emsp;+</h3>
     </div>
-    <div class="card card-body">
+    <div class="card card-body content">
       <table class="table table-active text-light table-responsive-sm">
         <tr>
           <th>Paciente</th>
@@ -24,13 +23,10 @@
         </div>
       </table>
     </div>
-  </div>
-  <br />
-  <div class="col-md">
-    <div class="card card-body">
-      <h3>Pedidos</h3>
+    <div class="card card-body collapsible d-flex flex-row justify-content-between"">
+      <h3>Pedidos Totales&emsp;+</h3>
     </div>
-    <div class="card card-body">
+    <div class="card card-body content">
       <table
         class="table table-fluid table-active text-light table-responsive-sm"
       >
@@ -56,13 +52,11 @@
         {% endfor %}
       </table>
     </div>
-  </div>
-  <br />
-  <div class="col-md">
-    <div class="card card-body">
-      <h3>Profesionales</h3>
+    <div
+      class="card card-body collapsible d-flex flex-row justify-content-between">
+      <h3>Profesionales&emsp;+</h3>
     </div>
-    <div class="card card-body">
+    <div class="card card-body content">
       <table class="table table-active text-light table-responsive-sm">
         <tr>
           <th>Nombre</th>
@@ -76,14 +70,11 @@
         </tr>
         {% endfor %}
       </table>
-    </div>
   </div>
-  <br />
-  <div class="col-md">
-    <div class="card card-body">
-      <h3>Pacientes</h3>
+    <div class="card card-body collapsible d-flex flex-row justify-content-between"">
+      <h3 >Pacientes&emsp;+</h3>
     </div>
-    <div class="card card-body">
+    <div class="card card-body content">
       <table class="table table-active text-light table-responsive-sm">
         <tr>
           <th>Nombre</th>
@@ -100,7 +91,110 @@
         {% endfor %}
       </table>
     </div>
-  </div>
 </div>
 <br />
+<h2 class="card-body">Reportes:</h2>
+<br>
+<div class="grid">
+    <div class="card card-body collapsible d-flex flex-row justify-content-between">
+      <h3>Pacientes que asistieron a sus turnos:&emsp;+</h3>
+    </div>
+    <div class="card card-body content">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>Paciente</th>
+          <th>Profesional medico</th>
+          <th>Fecha del turno</th>
+        </tr>
+        <div>
+          {% for paciente in Asistencias %}
+          <tr>
+            <td>{{ paciente.paciente }}</td>
+            <td>{{ paciente.profesional }}</td>
+            <td>{{ paciente.fecha }}</td>
+          </tr>
+          {% endfor %}
+        </div>
+      </table>
+    </div>
+    <div class="card card-body collapsible d-flex flex-row justify-content-between"">
+      <h3>Pacientes que no asistieron a sus turnos&emsp;+</h3>
+    </div>
+    <div class="card card-body content">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>Paciente</th>
+          <th>Profesional medico</th>
+          <th>Fecha del turno</th>
+        </tr>
+        <div>
+          {% for paciente in Inasistencias %}
+          <tr>
+            <td>{{ paciente.paciente }}</td>
+            <td>{{ paciente.profesional }}</td>
+            <td>{{ paciente.fecha }}</td>
+          </tr>
+          {% endfor %}
+        </div>
+      </table>
+    </div>
+    <div
+      class="card card-body collapsible d-flex flex-row justify-content-between">
+      <h3>Pacientes que hicieron al menos un Pedido&emsp;+</h3>
+    </div>
+    <div class="card card-body content">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>Nombre</th>
+          <th>DNI</th>
+        </tr>
+       
+        {% for paciente in Clientes %}
+        <tr>
+          <td>{{ paciente.nombre }}</td>
+          <td>{{ paciente.dni }}</td>
+          
+        </tr>
+        {% endfor %}
+    
+      </table>
+  </div>
+    <div class="card card-body collapsible d-flex flex-row justify-content-between"">
+      <h3 >Productos mas vendidos del mes&emsp;+</h3>
+    </div>
+    <div class="card card-body content">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>ID producto</th>
+          <th>Cantidad</th>
+        </tr>
+
+        {% for producto in Mas_vendidos %}
+        <tr>
+          <td>{{ producto.producto }}</td>
+          <td>{{ producto.vendidos }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+      <div class="card card-body collapsible d-flex flex-row justify-content-between"">
+      <h3 >Ventas totales:&emsp;+</h3>
+    </div>
+    <div class="card card-body content">
+      <table class="table table-active text-light table-responsive-sm">
+        <tr>
+          <th>ID vendedor</th>
+          <th>Ventas este mes</th>
+        </tr>
+        {% for venta in Ventas_Totales %}
+        <tr>
+          <td>{{ venta.vendedor }}</td>
+          <td>{{ venta.vendidos }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+</div>
+<br />
+
 {% endblock content %}

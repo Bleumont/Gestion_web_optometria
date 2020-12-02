@@ -8,6 +8,7 @@
   <div class="card card-body">
     <form method="POST" id="add_producto" >
       {% csrf_token %}
+      <table class="table table-active text-light table-responsive-sm">
         <div class='form-group'>
           <label for=nombre>Nombre</label>
           {{ form.nombre }}
@@ -34,28 +35,13 @@
           </div>
           <br>
         </div>
-            
-      
+        </table>
       <input type="submit" class="btn btn-primary" value="Crear producto"></input>
-      
       <a href="{% url 'ventas' %}"class='btn btn-secondary'>Atrás</a>
     </form>
   </div>
   </div>
 </div>
 <br />
-<script>
-  function checkLente(){
-    const $formulario = document.getElementById('camposLente'),
-     $checkBox = document.getElementById("id_es_lente");
-     $checkBox.setAttribute('onclick',"checkLente()")
-  
-    if ($checkBox.checked == true){
-      $formulario.style.display = "block";
-    } else {
-      $formulario.style.display = "none";
-    }
-}
-checkLente()
-</script>
+
 {% endblock content %}

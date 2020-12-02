@@ -46,28 +46,5 @@
   </div>
 </div>
 <br />
-<script>
-  function populateYears() {
-    const $yearSelect = document.querySelector('#year');
-    var date = new Date();
-    var year = date.getFullYear();
 
-    for (let i = 0; i <= 10; i++) {
-      var $option = document.createElement('option');
-      $option.textContent = year - i + 1;
-      $yearSelect.appendChild($option);
-    }
-  }
-  function populateDays() {
-    const $daySelect = document.querySelector('#day');
-
-    for (let i = 0; i <= 30; i++) {
-      var $option = document.createElement('option');
-      $option.textContent = i + 1;
-      $daySelect.appendChild($option);
-    }
-  }
-  populateDays();
-  populateYears();
-</script>
 {% endblock content %}

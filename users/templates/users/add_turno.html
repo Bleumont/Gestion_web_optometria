@@ -6,20 +6,26 @@
       <h3>Agregar Turno</h3>
     </div>
     <div class="card card-body">
-<form method="POST" >
-  {% csrf_token %}
-    <table class="table table-active text-light table-responsive-sm">
-
-      {{ form }}
-    </table>
-  
-  <input type="submit" class="btn btn-primary" value="Crear"></input>
-  
-  <a href="{% url 'secretaria' %}"class='btn btn-secondary'>Atrás</a>
-</form>
-
-</div>
-</div>
+      <form method="POST" >
+        {% csrf_token %}
+        <table class="table table-active text-light table-responsive-sm">
+          {% for campo in form %}
+          <tr>
+            <th>
+              {{ campo.label}}
+            </th>
+            <td>
+              {{ campo }}
+            </td>
+          </tr>
+          {% endfor %}
+          </table>
+        <input type="submit" class="btn btn-primary" value="Crear"></input>
+        <a href="{% url 'secretaria' %}"class='btn btn-secondary'>Atrás</a>
+      </form>
+    </div>
+  </div>
 </div>
 <br>
 {% endblock content %}
+

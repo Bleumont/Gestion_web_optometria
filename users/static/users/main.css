@@ -111,3 +111,15 @@ footer {
   border: 0;
   padding: 0;
 }
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+.collapsible {
+  cursor: pointer;
+}
+.active,
+.collapsible:hover {
+  background-color: rgb(69, 51, 134);
+}

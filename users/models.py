@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Pacientes(models.Model):
     nombre = models.CharField(max_length=30)
     dni = models.IntegerField()
-    historial = models.TextField(max_length=255)
+    historial = models.TextField(max_length=255, blank=True)
 
     def __str__(self):
 	    return self.nombre
