@@ -8,6 +8,7 @@
 - Base de datos: SQLite.
 - Demo de funcionamiento: [YouTube](https://www.example.com).
 - GitHub: [Repo](https://github.com/Bleumont/Python_JS_PoloTic).
+- Funcionando en [heroku](https://bleu-clinica.herokuapp.com/)
 
 ### El proyecto:
 
