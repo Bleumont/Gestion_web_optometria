@@ -160,3 +160,81 @@ footer {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
   background: rgba(135, 86, 214, 0.2);
 }
+.social_square_icons ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-left: 450px;
+  margin-top: 300px;
+}
+
+.social_square_icons ul li:first-child {
+  margin-left: 0px;
+}
+
+.social_square_icons ul li a {
+  float: left;
+  line-height: 40px;
+  color: #e0e0e0;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  margin-bottom: 40px;
+  border: 1px solid #e0e0e0;
+}
+
+.gap {
+  margin-right: 10px;
+}
+
+.social_icons_rounded ul li a i {
+  font-size: 16px;
+}
+
+.f_facebook:hover {
+  color: #fff;
+  background: #2a66b3;
+  border: 1px solid #2a66b3;
+}
+
+.t_twitter:hover {
+  color: #fff;
+  background: #35bbec;
+  border: 1px solid #35bbec;
+}
+
+.pinterest:hover {
+  color: #fff;
+  background: #cb2027;
+  border: 1px solid #cb2027;
+}
+
+.linkedin:hover {
+  color: #fff;
+  background: #007bb5;
+  border: 1px solid #007bb5;
+}
+
+.g_google:hover {
+  color: #fff;
+  background: #e55644;
+  border: 1px solid #e55644;
+}
+
+.dribbble:hover {
+  color: #fff;
+  background: #ea4c89;
+  border: 1px solid #ea4c89;
+}
+
+.skype:hover {
+  color: #fff;
+  background: #01aaf8;
+  border: 1px solid #01aaf8;
+}
+
+.flickr:hover {
+  color: #fff;
+  background: #ff0084;
+  border: 1px solid #ff0084;
+}
