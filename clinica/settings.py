@@ -1,8 +1,8 @@
 from pathlib import Path
-import os.path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = '6(#vh)^&v^3s$5zpyzeh60#&krn_m2&*d)2atmaed-+b=kmncd'
+SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = False
 ALLOWED_HOSTS = ['bleu-clinica.herokuapp.com', '127.0.0.1']
 
