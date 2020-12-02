@@ -1,4 +1,5 @@
 from pathlib import Path
+import os.path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '6(#vh)^&v^3s$5zpyzeh60#&krn_m2&*d)2atmaed-+b=kmncd'
