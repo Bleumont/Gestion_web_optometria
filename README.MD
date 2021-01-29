@@ -6,7 +6,7 @@
 - Estilos de Boostrap v4.5 y personalizados.
 - Frontend responsivo hecho a mano con HTML, CSS, JS, y mucho café.
 - Base de datos: SQLite.
-- Demo de funcionamiento: [YouTube](https://www.example.com).
+- Demo de funcionamiento: [YouTube](https://youtu.be/owydpT_EJ_c).
 - GitHub: [Repo](https://github.com/Bleumont/Gestion_web_optometria).
 - Funcionando en [heroku](https://bleu-clinica.herokuapp.com/)
 
