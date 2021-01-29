@@ -7,7 +7,7 @@
 - Frontend responsivo hecho a mano con HTML, CSS, JS, y mucho café.
 - Base de datos: SQLite.
 - Demo de funcionamiento: [YouTube](https://www.example.com).
-- GitHub: [Repo](https://github.com/Bleumont/Python_JS_PoloTic).
+- GitHub: [Repo](https://github.com/Bleumont/Gestion_web_optometria).
 - Funcionando en [heroku](https://bleu-clinica.herokuapp.com/)
 
 ### El proyecto:
